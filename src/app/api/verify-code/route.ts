@@ -1,6 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/user.model";
-import { z } from "zod";
 import { verifySchema } from "@/schemas/verifySchema";
 
 const verifyUserCode = verifySchema;
