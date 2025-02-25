@@ -70,5 +70,13 @@ export async function GET(request: Request) {
       },
       { status: 200 }
     );
-  } catch (error) {}
+  } catch (error) {
+    return Response.json(
+      {
+        success: false,
+        messages: "Something went wrong while fetching the messages!",
+      },
+      { status: 500 }
+    );
+  }
 }
