@@ -1,9 +1,7 @@
 "use client";
-
 import { verifySchema } from "@/schemas/verifySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -18,7 +16,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
 
 const VerifyAccount = () => {
   const router = useRouter();
@@ -29,24 +26,19 @@ const VerifyAccount = () => {
     defaultValues: {},
   });
 
-  
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
     try {
       const response = await axios.post("/api/verify-code", {
         username: params.username,
         code: data.code,
       });
-      toast(response.data.message, {
-        description: new Date().toString(),
-      });
+      toast(response.data.message);
       router.replace("/sign-in");
     } catch (error) {
       console.error("Error while verifying the user!");
       const axiosError = error as AxiosError<ApiResponse>;
       let errorMessage = axiosError.response?.data.message;
-      toast(errorMessage, {
-        description: new Date().toString(),
-      });
+      toast(errorMessage);
     }
   };
   return (
@@ -58,8 +50,6 @@ const VerifyAccount = () => {
           </h1>
           <p className="mb-4">Enter the verification code sent to your email</p>
         </div>
-
-        {/* Form */}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -69,15 +59,12 @@ const VerifyAccount = () => {
                 <FormItem>
                   <FormLabel>Verification Code</FormLabel>
                   <FormControl>
-                    <Input placeholder="code" {...field}/>
+                    <Input placeholder="code" {...field} />
                   </FormControl>
                 </FormItem>
               )}
             />
-
-            <Button type="submit">
-            Verify your account!
-            </Button>
+            <Button type="submit">Verify your account!</Button>
           </form>
         </Form>
       </div>
