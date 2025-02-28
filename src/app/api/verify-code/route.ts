@@ -11,9 +11,12 @@ export async function POST(request: Request) {
         const {username, code} = await request.json();
 
         const decodedUsername = decodeURIComponent(username);
+        console.log("This is decode username from url", decodedUsername);
+        
 
         //? Find the username in the DB
         const user = await UserModel.findOne({username: decodedUsername});
+        console.log(`This is ${decodedUsername} data`, user);
         
         //? If no user found
         if (!user) {
