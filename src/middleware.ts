@@ -5,7 +5,7 @@ export async function middleware(request: NextRequest) {
     const token = await getToken({ req: request });
     const url = request.nextUrl;
 
-    const authRoutes = ["/", "/sign-in", "/sign-up", "/verify"];
+    const authRoutes = ["/sign-in", "/sign-up", "/verify"];
     const protectedRoutes = ["/dashboard"];
 
     // 🚀 If the user is logged in and trying to access auth pages, redirect to dashboard
