@@ -4,6 +4,8 @@ import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 import {User} from 'next-auth'
 import { Button } from "./ui/button"
+import Logo from "../../assets/Logo3.png"
+import Image from "next/image"
 const Navbar = () => {
 
     const {data: session} = useSession();
@@ -11,7 +13,9 @@ const Navbar = () => {
   return (
     <nav className="p-4 md:p-6 shadow-md">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <a href="#">Ghost Talk</a>
+            <a href="#">
+                <Image src={Logo} alt="logo" className="w-16 h-16"/>
+            </a>
             {
                 session ? (
                     <div>

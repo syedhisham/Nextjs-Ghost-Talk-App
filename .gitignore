@@ -20,6 +20,8 @@
 # production
 /build
 
+#text files
+/.txt
 # misc
 .DS_Store
 *.pem
