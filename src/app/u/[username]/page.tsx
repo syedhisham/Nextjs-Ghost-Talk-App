@@ -66,7 +66,7 @@ const page = () => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input placeholder="Write your anonymous message here..." {...field} />
+                <Textarea placeholder="Write your anonymous message here..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

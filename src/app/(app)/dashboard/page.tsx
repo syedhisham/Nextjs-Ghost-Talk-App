@@ -10,7 +10,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, {AxiosError} from "axios";
 import { Loader2, RefreshCcw } from "lucide-react";
-import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -47,7 +46,7 @@ const page = () => {
         setValue('acceptMessages', response.data.isAcceptingMessage!)
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>
-        toast(axiosError.response?.data.message || 'Failed to fetch message settings')
+        toast.error(axiosError.response?.data.message || 'Failed to fetch message settings')
       } finally {
         setIsSwitchLoading(false)
       }
@@ -65,7 +64,7 @@ const page = () => {
       }
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      toast(axiosError.response?.data.message || 'Failed to fetch messages');
+      toast.error(axiosError.response?.data.message || 'Failed to fetch messages');
     } finally {
       setLoading(false);
       setIsSwitchLoading(false);
@@ -87,10 +86,10 @@ const page = () => {
         acceptMessages: !acceptMessages
       });
       setValue('acceptMessages', !acceptMessages)
-      toast(response.data.message || 'Is Accepting Message flag toggled successfuly!')
+      toast.success(response.data.message || 'Status toggled!')
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>
-      toast(axiosError.response?.data.message || 'Failed to toggle accept message flag')
+      toast.error(axiosError.response?.data.message || 'Failed to toggle accept message flag')
     }
   }
 
@@ -110,7 +109,7 @@ const page = () => {
   const copyToClipBoard = () => {
     //? can use navigator bcz of client component
     navigator.clipboard.writeText(profileUrl);
-    toast('URL copied')
+    toast.success('URL copied')
   }
   return (
     <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
