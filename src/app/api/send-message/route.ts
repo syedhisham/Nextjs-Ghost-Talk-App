@@ -7,6 +7,8 @@ export async function POST(request: Request) {
 
   //? Extract he username and content from frontend
   const { username, content } = await request.json();
+  console.log('Username and content are: ', username, content);
+  
 
   try {
     //? find the user

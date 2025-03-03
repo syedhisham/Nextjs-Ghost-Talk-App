@@ -27,13 +27,14 @@ export async function GET(request: Request) {
   //   const userId = user._id
   //! As we have converted the userId into string inthe options.ts file for authentication we have to convert it back to mongoose Object for aggregation pipelines, otherwise errors can occur
   const userId = new mongoose.Types.ObjectId(user._id);
-
+  console.log("It is user Id", userId);
+  
   try {
     //? Todo comment
     const user = await UserModel.aggregate([
       {
         $match: {
-          id: userId,
+          _id: userId,
         },
       },
       {
