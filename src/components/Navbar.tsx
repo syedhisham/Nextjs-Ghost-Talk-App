@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <nav className="p-4 md:p-6 shadow-md">
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <a href="#">
+            <a href="/">
                 <Image src={Logo} alt="logo" className="w-16 h-16"/>
             </a>
             {
