@@ -38,7 +38,7 @@ const page = () => {
   //? watch ko inject krna parta h k kis chez ko watch karr rha hn
   const acceptMessages = watch('acceptMessages');
 
-  const fetchAcceptMessage = useCallback(() => {
+  const fetchAcceptMessage = useCallback(
     async() => {
       setIsSwitchLoading(true);
   
@@ -51,29 +51,27 @@ const page = () => {
       } finally {
         setIsSwitchLoading(false)
       }
-    }
   }, [setValue])
 
-  const fetchMessages = useCallback(() => {
-    async(refresh: boolean = false) => {
-      setLoading(true);
-      setIsSwitchLoading(false)
-      try {
-        const response = await axios.get<ApiResponse>("/api/get-messages");
-        setMessages(response.data.messages || [])
+  const fetchMessages = useCallback(async (refresh: boolean = false) => {
+    setLoading(true);
+    setIsSwitchLoading(false);
+    try {
+      const response = await axios.get<ApiResponse>("/api/get-messages");
+      setMessages(response.data.messages || []);
   
-        if (refresh) {
-          toast('Showing latest messages!')
-        }
-      } catch (error) {
-        const axiosError = error as AxiosError<ApiResponse>
-        toast(axiosError.response?.data.message || 'Failed to fetch messages')
-      } finally {
-        setLoading(false);
-        setIsSwitchLoading(false);
+      if (refresh) {
+        toast('Showing latest messages!');
       }
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast(axiosError.response?.data.message || 'Failed to fetch messages');
+    } finally {
+      setLoading(false);
+      setIsSwitchLoading(false);
     }
-  }, [setValue])
+  }, [setValue]);
+  
 
   useEffect(() => {
     if (!session || !session.user) return;
