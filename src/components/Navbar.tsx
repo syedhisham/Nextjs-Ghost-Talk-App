@@ -6,8 +6,9 @@ import {User} from 'next-auth'
 import { Button } from "./ui/button"
 import Logo from "../../assets/Logo3.png"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 const Navbar = () => {
-
+const router = useRouter()
     const {data: session} = useSession();
     const user: User = session?.user as User
   return (
@@ -20,7 +21,7 @@ const Navbar = () => {
                 session ? (
                     <div>
                         <span className="mr-4">Welcome {user?.username || user?.email}</span>
-                    <Button onClick={() => signOut()} className="w-full md:w-auto">Logout</Button>
+                    <Button onClick={() => {signOut(); router.replace('/sign-in')}} className="w-full md:w-auto">Logout</Button>
                     </div>
                 ) : (
                     <Link href="/sign-in">
