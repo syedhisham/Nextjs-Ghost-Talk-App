@@ -63,6 +63,9 @@ export async function POST(request: Request) {
       const expiryDate = new Date();
       expiryDate.setHours(expiryDate.getHours() + 1);
 
+      const idx = Math.floor(Math.random() * 100) + 1;
+      const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`;
+
       const newUser = new UserModel({
         username,
         email,
@@ -71,6 +74,7 @@ export async function POST(request: Request) {
         verifyCodeExpiry: expiryDate,
         isVerified: false,
         isAcceptingMessage: true,
+        profilePic: randomAvatar,
         messages: [],
       });
       await newUser.save();

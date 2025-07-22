@@ -42,30 +42,37 @@ const HowItWorks = () => {
                   Three simple steps
                 </DrawerTitle>
               </DrawerHeader>
-              <DrawerDescription className="w-full">
-                <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="p-4 border rounded-lg shadow-md bg-white">
-                    <p className="text-xl font-semibold">Step 1</p>
-                    <p className="text-gray-500 mt-2">
-                      Start by entering a username or staying completely
-                      anonymous.
-                    </p>
-                  </div>
-                  <div className="p-4 border rounded-lg shadow-md bg-white">
-                    <p className="text-xl font-semibold">Step 2</p>
-                    <p className="text-gray-500 mt-2">
-                      Send messages to others without revealing who you are.
-                    </p>
-                  </div>
-                  <div className="p-4 border rounded-lg shadow-md bg-white">
-                    <p className="text-xl font-semibold">Step 3</p>
-                    <p className="text-gray-500 mt-2">
-                      Receive replies and enjoy the thrill of anonymous chats.
-                    </p>
+
+              {/* FIXED DrawerDescription wrapping a div, not raw <p> elements */}
+              <DrawerDescription asChild>
+                <div className="w-full">
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div className="p-4 border rounded-lg shadow-md bg-white">
+                      <h3 className="text-xl font-semibold">Step 1</h3>
+                      <p className="text-gray-500 mt-2">
+                        Copy your unique link and share it with friends. They can
+                        use this link to leave you anonymous feedback.
+                      </p>
+                    </div>
+                    <div className="p-4 border rounded-lg shadow-md bg-white">
+                      <h3 className="text-xl font-semibold">Step 2</h3>
+                      <p className="text-gray-500 mt-2">
+                        Your friends open the link and are redirected to a message
+                        box where they can send anonymous messages.
+                      </p>
+                    </div>
+                    <div className="p-4 border rounded-lg shadow-md bg-white">
+                      <h3 className="text-xl font-semibold">Step 3</h3>
+                      <p className="text-gray-500 mt-2">
+                        You receive all incoming messages privately in your
+                        dashboard — with complete anonymity.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </DrawerDescription>
             </div>
+
             <DrawerFooter>
               <DrawerClose asChild>
                 <Button

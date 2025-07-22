@@ -1,4 +1,4 @@
-import CallToActionSection from "@/components/CallToActionSection"
+// import CallToActionSection from "@/components/CallToActionSection"
 import HeroSection from "@/components/HeroSection"
 import HowItWorks from "@/components/HowItWorks"
 
@@ -7,7 +7,7 @@ const page = () => {
     <div>
       <HeroSection/>
       <HowItWorks/>
-      <CallToActionSection/>
+      {/* <CallToActionSection/> */}
     </div>
   )
 }
