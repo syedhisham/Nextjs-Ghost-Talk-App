@@ -37,7 +37,7 @@ const VerifyAccount = () => {
     } catch (error) {
       console.error("Error while verifying the user!");
       const axiosError = error as AxiosError<ApiResponse>;
-      let errorMessage = axiosError.response?.data.message;
+      const errorMessage = axiosError.response?.data.message;
       toast(errorMessage);
     }
   };

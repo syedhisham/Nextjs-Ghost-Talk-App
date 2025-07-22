@@ -5,7 +5,7 @@ import UserModel from "@/models/user.model";
 import { User } from "next-auth";
 import mongoose from "mongoose";
 
-export async function GET(request: Request) {
+export async function GET() {
   await dbConnect();
 
   //? Check is user authenticated
@@ -72,6 +72,8 @@ export async function GET(request: Request) {
       { status: 200 }
     );
   } catch (error) {
+    console.log("Internal Server Error",error);
+    
     return Response.json(
       {
         success: false,

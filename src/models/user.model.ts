@@ -1,6 +1,6 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
-//? Mongoose interface standard structure
+// Mongoose interface standard structure
 export interface Message extends Document {
   content: string;
   createdAt: Date;
@@ -14,18 +14,20 @@ const MessageSchema: Schema<Message> = new Schema({
   createdAt: {
     type: Date,
     required: true,
-    default: Date.now(),
+    default: Date.now,
   },
 });
-//? Idhr message user k doc k andar hi save hrha alag s bhi krwa skty thy. We are feeding each message doc into the message array
+
+// Note: Fixed the property name to match your schema
 export interface User extends Document {
+  _id: Types.ObjectId
   username: string;
   email: string;
   password: string;
   verifyCode: string;
   verifyCodeExpiry: Date;
   isVerified: boolean;
-  isAcceptingMessage: boolean;
+  isAcceptingMessage: boolean; // This matches your schema
   profilePic: string;
   messages: Message[];
 }
@@ -69,9 +71,10 @@ const UserSchema: Schema<User> = new Schema({
   },
   messages: [MessageSchema],
 });
-// idhr ham (mongoose.model.User) tak b lkh skty bss type strict bnany k leye custom type jo bnaya hy wo bta dia
-const UserModel =
-  (mongoose.models.User as mongoose.Model<User>) ||
+
+// Properly typed model with conditional creation
+const UserModel: mongoose.Model<User> = 
+  (mongoose.models?.User as mongoose.Model<User>) || 
   mongoose.model<User>("User", UserSchema);
 
 export default UserModel;

@@ -16,7 +16,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const page = () => {
+const Page = () => {
   const [messages, setMessages] = useState<Message []>([]);
   const [loading, setLoading] = useState(false);
   const [isSwitchLoading, setIsSwitchLoading] = useState(false);
@@ -70,7 +70,7 @@ const page = () => {
       setLoading(false);
       setIsSwitchLoading(false);
     }
-  }, [setValue]);
+  }, []);
   
 
   useEffect(() => {
@@ -161,7 +161,7 @@ const page = () => {
 
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {messages.length > 0 ? (
-          messages.map((message, index) => (
+          messages.map((message) => (
             <MessageCard
             key={message._id as string}
             message={message}
@@ -178,4 +178,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

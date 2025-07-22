@@ -4,8 +4,12 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/models/user.model";
 import { User } from "next-auth";
 
-export async function DELETE(request: Request, {params}: {params:{messageid: string}}) {
-  const messageId = params.messageid
+export async function DELETE(
+  request: Request, 
+  { params }: { params: Promise<{ messageid: string }> }
+) {
+  // Await the params object in Next.js 15
+  const { messageid } = await params;
   await dbConnect();
 
   //? Check is user authenticated
@@ -17,7 +21,7 @@ export async function DELETE(request: Request, {params}: {params:{messageid: str
     return Response.json(
       {
         success: false,
-        message: "Not Autheticated",
+        message: "Not Authenticated",
       },
       { status: 401 }
     );
@@ -25,9 +29,9 @@ export async function DELETE(request: Request, {params}: {params:{messageid: str
 
   try {
     const updateResult = await UserModel.updateOne(
-      {_id: user._id},
-      {$pull: {messages: {_id: messageId}}}
-    )
+      { _id: user._id },
+      { $pull: { messages: { _id: messageid } } }
+    );
 
     if (updateResult.modifiedCount == 0) {
       return Response.json(
@@ -42,7 +46,7 @@ export async function DELETE(request: Request, {params}: {params:{messageid: str
     return Response.json(
       {
         success: true,
-        message: "Message Deleted successfuly!",
+        message: "Message deleted successfully!",
       },
       { status: 200 }
     );
@@ -57,6 +61,4 @@ export async function DELETE(request: Request, {params}: {params:{messageid: str
       { status: 500 }
     );
   }
-
-  
 }

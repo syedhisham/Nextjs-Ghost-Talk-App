@@ -57,7 +57,7 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-      console.log("Error adding messages!");
+      console.log("Error adding messages!", error);
     return Response.json(
       {
         success: false,
