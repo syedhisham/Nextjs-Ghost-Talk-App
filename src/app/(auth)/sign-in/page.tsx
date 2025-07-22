@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { signInSchema } from "@/schemas/signInSchema";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 const Page = () => {
   const router = useRouter();
@@ -79,11 +80,17 @@ const Page = () => {
               )}
             />
 
-            <Button type="submit" >
-              Sign In
-            </Button>
+            <Button type="submit">Sign In</Button>
           </form>
         </Form>
+        <div className="text-center mt-4">
+          <p>
+            Don't have an account?{" "}
+            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+              Sign up
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
